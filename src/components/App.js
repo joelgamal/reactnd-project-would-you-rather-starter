@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
-import NewQuestion from './NewQuestion'
-import Question from './Question'
+// import NewQuestion from './NewQuestion'
+// import Question from './Question'
+// import LogIn from './LogIn'
+import PollScore from './PollScore'
 
 
 class App extends Component {
@@ -16,11 +18,14 @@ class App extends Component {
       <div className="App">
         starter code
         {this.props.loading === true
-          ? null
+          ? <h3>LOADING</h3>
           : <div>
 
-          <NewQuestion/>
-          <Question id="6ni6ok3ym7mf1p33lnez"/>
+          {/* <NewQuestion/>
+          <Question id="6ni6ok3ym7mf1p33lnez"/> 
+          <LogIn />*/}
+          <PollScore id="vthrdm985a262al8qx3do"/>
+          
           </div>
         
         }
@@ -30,9 +35,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ authedUser }) {
+function mapStateToProps ({ users }) {
   return {
-    loading: authedUser === null
+    loading: (users.length === 0)
   }
 }
 
