@@ -1,4 +1,6 @@
 import { saveQuestion,saveQuestionAnswer } from '../utils/api'
+import { createQuestionUser,answerQuestionUser } from '../actions/users'
+
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const CREATE_QUESTIONS = 'CREATE_QUESTIONS'
@@ -30,7 +32,11 @@ export function handleCreateQuestion(optionOneText,optionTwoText){
       optionTwoText
 
     })
-    .then((question) => dispatch(createQuestion(question)))
+    .then((question) =>{ 
+      dispatch(createQuestion(question))
+      dispatch(createQuestionUser(question.id,question.author))
+
+    })
   }
 
 }
@@ -54,6 +60,8 @@ export function handleAnswerQuestion(qid,answer){
       qid,
       answer,
     ))
+
+    dispatch(answerQuestionUser(authedUser, qid,answer))
 
     // console.log("================",{authedUser, qid,answer,})
 

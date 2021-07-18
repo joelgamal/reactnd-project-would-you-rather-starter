@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component ,Fragment } from 'react'
 import { connect } from 'react-redux'
 import {handleAnswerQuestion} from '../actions/questions'
 
@@ -36,8 +36,8 @@ class Question extends Component {
 
     render(){
         const {question} = this.props
-        const optOneTxt = question.optionOne.text
-        const optTwoTxt = question.optionTwo.text
+        const optOneTxt = question && question.optionOne.text
+        const optTwoTxt = question && question.optionTwo.text
 
         // console.log(question.optionOne)
         
@@ -45,6 +45,9 @@ class Question extends Component {
 
         return(
             <div>
+                {question
+                ? 
+                <Fragment>
                 <h2> {this.props.authedUser} asks:</h2>
                 <h3>Would you rather?</h3>
                 <form onSubmit={this.handleSubmit}>
@@ -70,13 +73,10 @@ class Question extends Component {
                     disabled={this.state.selectedOption === ''}>
                         Submit
                     </button>
-
-
-
                 </form>
-
-
-
+                </Fragment>
+                : <h3>Loading</h3>
+                }
             </div>
         )
     }

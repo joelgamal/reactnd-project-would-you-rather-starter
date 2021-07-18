@@ -24,6 +24,7 @@ class Home extends Component{
                         name = {user.name}
                         opt= {questions[id].optionOne.text}
                         answered = {false}
+                        key = {id}
                     />)
                     }
                     ) }
@@ -32,13 +33,14 @@ class Home extends Component{
 
                 <TabPanel>
                     <h2>List of Answered</h2>
-                    {answeredIDs.map((id)=>{
+                    {Object.keys(questions).length !== 0  && answeredIDs.map((id)=>{
                         const user = users[questions[id].author]
                         return(<Poll 
                         avatar={user.avatarURL}
                         name = {user.name}
                         opt= {questions[id].optionOne.text}
                         answered = {true}
+                        key = {id}
                     />)
                     }
                     ) }
@@ -54,7 +56,7 @@ class Home extends Component{
 
 function mapStateToProps ({ authedUser, questions,users }) {
     //todo; change 'tylermcginnis' to authedUser
-    const answeredIDs= Object.keys(users['tylermcginnis'].answers)
+    const answeredIDs= Object.keys(users).length !== 0? Object.keys(users['tylermcginnis'].answers): []
     console.log("answeredIDs",answeredIDs)
     const questionsIDs = Object.keys(questions)
     const unansweredIDs= questionsIDs
