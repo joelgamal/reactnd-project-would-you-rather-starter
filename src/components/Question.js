@@ -30,7 +30,8 @@ class Question extends Component {
         this.setState(()=>({
             selectedOption: '',
         }))
-        this.props.history.push(`/polls/${this.props.question.id}`)
+
+        this.props.history.push(`/polls/${this.props.question.id }`)
 
     }
 
@@ -41,8 +42,6 @@ class Question extends Component {
         const optTwoTxt = question && question.optionTwo.text
 
         // console.log(question.optionOne)
-        
-        
 
         return(
             <div>
