@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
+import Home from './Home'
 // import NewQuestion from './NewQuestion'
 // import Question from './Question'
 // import LogIn from './LogIn'
-import PollScore from './PollScore'
+// import PollScore from './PollScore'
+// import LeaderBoard from './LeaderBoard'
+
 
 
 class App extends Component {
@@ -23,8 +26,12 @@ class App extends Component {
 
           {/* <NewQuestion/>
           <Question id="6ni6ok3ym7mf1p33lnez"/> 
-          <LogIn />*/}
+          <LogIn />
           <PollScore id="vthrdm985a262al8qx3do"/>
+
+          <LeaderBoard/>*/}
+
+          <Home/>
           
           </div>
         
