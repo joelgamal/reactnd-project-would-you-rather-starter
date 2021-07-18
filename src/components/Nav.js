@@ -29,13 +29,13 @@ class Nav extends Component{
                     </ul>
                 </nav>
                 
-                {authedUser && user && `Hello, ${user.name}`}
+                {authedUser && user && `Hello, ${user.name}    `}
                 {/* <button>
                     Logout
                 </button> */}
                 {authedUser &&<NavLink 
                   to='/login'
-                >Logout</NavLink>
+                >Log out</NavLink>
                 }
             </Fragment>
         )

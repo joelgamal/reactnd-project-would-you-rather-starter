@@ -37,7 +37,8 @@ class PollScore extends Component{
 
 }
 
-function mapStateToProps ({ questions, users }, {id}) {
+function mapStateToProps ({ questions, users }, props) {
+    const { id } = props.match.params
     const question = questions[id]
     const user = question? users[question.author]: null
     console.log("==========",user)

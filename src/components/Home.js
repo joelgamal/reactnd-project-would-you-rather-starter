@@ -16,7 +16,6 @@ class Home extends Component{
                 </TabList>
 
                 <TabPanel>
-                    <h2>List of Unanswered</h2>
                     {unansweredIDs.map((id)=>{
                         const user = users[questions[id].author]
                         return(<Poll 
@@ -24,6 +23,7 @@ class Home extends Component{
                         name = {user.name}
                         opt= {questions[id].optionOne.text}
                         answered = {false}
+                        id = {id}
                         key = {id}
                     />)
                     }
@@ -32,7 +32,6 @@ class Home extends Component{
                 </TabPanel>
 
                 <TabPanel>
-                    <h2>List of Answered</h2>
                     {Object.keys(questions).length !== 0  && answeredIDs.map((id)=>{
                         const user = users[questions[id].author]
                         return(<Poll 
@@ -40,6 +39,7 @@ class Home extends Component{
                         name = {user.name}
                         opt= {questions[id].optionOne.text}
                         answered = {true}
+                        id = {id}
                         key = {id}
                     />)
                     }
@@ -56,26 +56,21 @@ class Home extends Component{
 
 function mapStateToProps ({ authedUser, questions,users }) {
     //todo; change 'tylermcginnis' to authedUser
-    const answeredIDs= Object.keys(users).length !== 0? Object.keys(users['tylermcginnis'].answers): []
-    console.log("answeredIDs",answeredIDs)
+    const ansIDs= Object.keys(users).length !== 0? Object.keys(users[authedUser].answers): []
+    // console.log("answeredIDs",answeredIDs)
+    const answeredIDs = ansIDs.sort((a,b,) => questions[b].timestamp - questions[a].timestamp)
     const questionsIDs = Object.keys(questions)
-    const unansweredIDs= questionsIDs
+    const unansIDs= questionsIDs
 
     for (const aid of answeredIDs) {
-        for( var i = 0; i < unansweredIDs.length; i++){ 
-        
-            if ( unansweredIDs[i] === aid) { 
-        
-                unansweredIDs.splice(i, 1); 
+        for( var i = 0; i < unansIDs.length; i++){  
+            if ( unansIDs[i] === aid) { 
+                unansIDs.splice(i, 1); 
             }
-        
         }
     }
-
-    console.log("unansweredIDs",unansweredIDs)
-    
-
-
+    // console.log("unansweredIDs",unansweredIDs)
+    const unansweredIDs = unansIDs.sort((a,b,) => questions[b].timestamp - questions[a].timestamp)
 
     return{
         users,

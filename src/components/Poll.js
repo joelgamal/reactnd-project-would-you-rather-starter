@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import {Link } from 'react-router-dom'
+
 
 
 // component no. 8
 class Poll extends Component{
     render(){
-        const{avatar, name, opt, answered} = this.props
+        const{avatar, name, opt, answered, id} = this.props
         return(
             <div>
                 <div>
@@ -19,10 +21,16 @@ class Poll extends Component{
                     
                 </div>
                 <div>
-                    <h2>Would you rather</h2>
+                    <h4>Would you rather</h4>
                     ...{opt}...
                     <br></br>
-                    <button >View Poll</button>
+                    {/* <button >View Poll</button> */}
+
+                    <Link to={`/questions/${id}`} >
+                        View Poll
+                    </Link>
+                    <br></br>
+                    <br></br>
                     
                 </div>
             </div>

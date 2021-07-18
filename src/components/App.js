@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react'
-import { BrowserRouter as Router, Route , Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route , Redirect, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Home from './Home'
 import NewQuestion from './NewQuestion'
 // import Question from './Question'
 import LogIn from './LogIn'
-// import PollScore from './PollScore'
+import PollScore from './PollScore'
 import LeaderBoard from './LeaderBoard'
 import Nav from './Nav'
 
@@ -29,19 +29,30 @@ class App extends Component {
             {loading === true
               ? <h3>LOADING</h3>
               : <div>
-                <Route path='/' exact component={LogIn} />
+                <Switch>
 
-                <Route path="/home">
-                  {authedUser ?  <Home /> : <Redirect to="/login" />}
-                </Route>
-                <Route path="/add">
-                  {authedUser ?  <NewQuestion /> : <Redirect to="/login" />}
-                </Route>
-                <Route path="/leaderboard">
-                  {authedUser ?  <LeaderBoard /> : <Redirect to="/login" />}
-                </Route>
-                <Route path='/login'  component={LogIn} />    
+                  <Route path='/' exact component={LogIn} />
 
+                  <Route path="/home">
+                    {authedUser ?  <Home /> : <Redirect to="/login" />}
+                  </Route>
+                  <Route path="/add">
+                    {authedUser ?  <NewQuestion /> : <Redirect to="/login" />}
+                  </Route>
+                  <Route path="/leaderboard">
+                    {authedUser ?  <LeaderBoard /> : <Redirect to="/login" />}
+                  </Route>
+                  <Route path="/questions/:id" 
+                  component={PollScore}
+                  />
+                  {/* <Route path="/questions/:id">
+                    {authedUser ?  <PollScore /> : <Redirect to="/login" />}
+                  </Route> */}
+                  <Route path='/login'  component={LogIn} /> 
+                  <Route path="/error" component={NoMatch} />
+                  <Redirect to="/error" />   
+
+                </Switch>
               {/*<Question id="6ni6ok3ym7mf1p33lnez"/> 
               <NewQuestion/>
               <LogIn />
@@ -65,6 +76,13 @@ function mapStateToProps ({ authedUser ,users }) {
     loading: (users.length === 0),
     authedUser,
   }
+}
+
+const NoMatch = ()=>{
+  return(
+    <h2>Page not found</h2>
+  )
+
 }
 
 export default connect(mapStateToProps)(App);
