@@ -9,8 +9,8 @@ This is a game that allow users to create and answer different poll and increase
 
 ## Installation
 
-* install all project dependencies with `npm install` or `yarn install`
-* start the development server with `npm start` or `yarn start` (It is recommeded to only use either `npm` or `yarn`, both do the same function)
+* install all project dependencies with `npm install` 
+* start the development server with `npm start` 
 
 
 ## Usage
