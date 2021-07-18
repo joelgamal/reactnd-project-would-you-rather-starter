@@ -26,9 +26,13 @@ class Poll extends Component{
                     <br></br>
                     {/* <button >View Poll</button> */}
 
-                    <Link to={`/questions/${id}`} >
+                    {answered &&<Link to={`/polls/${id}`} >
                         View Poll
-                    </Link>
+                    </Link>}
+
+                    {!answered &&<Link to={`/questions/${id}`} >
+                        View Poll
+                    </Link>}
                     <br></br>
                     <br></br>
                     

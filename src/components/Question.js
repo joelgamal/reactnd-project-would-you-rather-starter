@@ -30,6 +30,7 @@ class Question extends Component {
         this.setState(()=>({
             selectedOption: '',
         }))
+        this.props.history.push(`/polls/${this.props.question.id}`)
 
     }
 
@@ -83,7 +84,8 @@ class Question extends Component {
 }
 
 
-function mapStateToProps ({ authedUser, questions }, {id}) {
+function mapStateToProps ({ authedUser, questions },props) {
+    const { id } = props.match.params
     const question = questions[id]
 
     return{
