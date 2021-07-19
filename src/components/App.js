@@ -38,32 +38,23 @@ class App extends Component {
                     {authedUser ?  <Home /> : <Redirect to="/login" />}
                   </Route>
                   <Route path="/add">
-                    {authedUser ?  <NewQuestion /> : <Redirect to="/login" />}
+                    {authedUser ?  <NewQuestion /> : 
+                    <Redirect to={{pathname: '/login', state: { prevPath: "add" }}} />}
                   </Route>
                   <Route path="/leaderboard">
-                    {authedUser ?  <LeaderBoard /> : <Redirect to="/login" />}
+                    {authedUser ?  <LeaderBoard /> : 
+                    <Redirect to={{pathname: '/login', state: { prevPath: "leaderboard" }}} />}
                   </Route>
-                  <Route path="/questions/:id" 
-                  component={Question}
-                  />
-
-                  <Route path="/polls/:id" 
-                  component={PollScore}
-                  />
-                  {/* <Route path="/questions/:id">
-                    {authedUser ?  <PollScore /> : <Redirect to="/login" />}
-                  </Route> */}
+                  <Route path="/questions/:id" component={Question}/>
+                  <Route path="/polls/:id" component={PollScore} />
                   <Route path='/login'  component={LogIn} /> 
-                  <Route path="/error" component={NoMatch} />
+                  <Route path="/error" >
+                    {authedUser ?  <NoMatch /> : 
+                    <Redirect to={{pathname: '/login', state: { prevPath: "error" }}}/>}
+                  </Route>
                   <Redirect to="/error" />   
 
                 </Switch>
-              {/*<Question id="6ni6ok3ym7mf1p33lnez"/> 
-              <NewQuestion/>
-              <LogIn />
-              <PollScore id="vthrdm985a262al8qx3do"/>
-              <LeaderBoard/>
-              <Home/>*/}
               
               </div>
             

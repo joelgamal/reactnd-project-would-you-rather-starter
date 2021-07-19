@@ -28,7 +28,12 @@ class LogIn extends Component{
             value: '',
         }))
 
-        this.props.history.push('/home')
+        const path =this.props.location.state? this.props.location.state.prevPath: null
+        if( path ){
+            this.props.history.push(path)
+        }else{
+            this.props.history.push('home')
+        }
 
     }
 
@@ -70,9 +75,12 @@ class LogIn extends Component{
     }
 }
 
-function mapStateToProps ({ users }) {
+function mapStateToProps ({ users }, props) {
+    // const {state}= props.location
+    // console.log("props.location", props.location)
     return{
-        users
+        users,
+        // state,
     }
 }
 
